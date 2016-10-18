@@ -1,0 +1,43 @@
+{
+  "name": "react-material-tags",
+  "version": "1.0.0",
+  "description": "React component - tags form widget",
+  "main": "./dist/tags.js",
+  "scripts": {
+    "build": "babel src --out-dir dist",
+    "prepublish": "npm run build",
+    "test": "echo \"Error: no test specified. I will add it soon. \" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maciejsikora/react-material-tags.git"
+  },
+  "keywords": [
+    "react",
+    "tags",
+    "react-tags",
+    "react-component",
+    "tag",
+    "react-material",
+    "react-tag"
+  ],
+  "author": "Maciej Sikora hello@maciejsikora.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/maciejsikora/react-material-tags/issues"
+  },
+  "homepage": "https://github.com/maciejsikora/react-material-tags#readme",
+  "devDependencies": {
+    "babel-cli": "^6.16.0",
+    "babel-jest": "^16.0.0",
+    "babel-preset-react": "^6.16.0",
+    "babel-preset-es2015": "^6.16.0",
+    "babel-preset-stage-2": "^6.17.0",
+    "jest": "^16.0.1",
+    "react-test-renderer": "^15.3.2"
+  },
+  "dependencies": {
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2"
+  }
+}
