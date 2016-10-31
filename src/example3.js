@@ -1,7 +1,8 @@
 import React from 'react';
 import Tags from './tags';
+import ActionGrade from 'material-ui/svg-icons/action/grade';
 
-class Example2 extends React.Component{
+class Example3 extends React.Component{
 
   render(){
 
@@ -20,17 +21,16 @@ class Example2 extends React.Component{
       {label:"Portugal"},
       {label:"Spain"},
       {label:"Italy"}
-
-
-
     ];
 
     const defTags=[
+      {label:"Spain"},
+      {label:"Italy"}
     ];
 
     return (
 
-        <Tags defTags={defTags} button={{secondary:true}} sourceTags={sourceTags} />
+        <Tags defTags={defTags} button={{child: <ActionGrade />}} sourceTags={sourceTags} />
     )
 
   }
@@ -38,4 +38,4 @@ class Example2 extends React.Component{
 
 };
 
-export default Example2;
+export default Example3;

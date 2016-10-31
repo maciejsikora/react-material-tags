@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import AutoComplete from 'material-ui/AutoComplete';
 import Chip from 'material-ui/Chip';
-import IconButton from 'material-ui/IconButton';
-
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 /**
 tags special component
 **/
@@ -82,8 +82,13 @@ class Tags extends Component{
   //after click autocomplete
   handleAutocomplete(value){
 
-
       this.refs.textField.focus();
+
+      if (typeof value !== "object" )
+      return;
+
+      //set state value
+      this.handleTextValueChange(value.label);
   }
 
   //on button click
@@ -116,6 +121,20 @@ class Tags extends Component{
 
   }
 
+  /*
+  Checks if tag exists in source list
+  @return boolean
+  */
+  tagInSourceList(tag){
+
+    return this.props.sourceTags.find((source)=>{
+
+        return source.label===tag;
+
+    })?true:false;
+
+  }
+
   //removes tag from autocomplete
   removeTagFromSourceTags(tag){
 
@@ -140,6 +159,14 @@ class Tags extends Component{
       return;
     }
 
+    value=value.trim(); //remove spaces
+
+    if (this.props.onlyFromSource){
+      //so only tags exists in souce can be added
+      if (!this.tagInSourceList(value))
+      return this.showCannotError(); //not allowed tag
+    }
+
     this.hideInputError();
 
     if (this.tagExistsInList(value))
@@ -157,6 +184,17 @@ class Tags extends Component{
     this.props.onAdd(this.state.tags[0],this.state.tags);//we send to callback current tags
   }
 
+  /*
+  Shows error when tah is nota allowed
+  */
+  showCannotError(){
+
+      this.setState({errorText:this.props.onlyFromSourceErrorText});
+  }
+
+  /*
+  Shows error when not value is inserted in TextField
+  */
   showInputError(){
     this.setState({errorText:this.errorText});
   }
@@ -199,27 +237,27 @@ class Tags extends Component{
     if (this.props.button!==null){
 
 
-      const {child,...otherButtonProps}=this.props.button;
+      let {child,style,...otherButtonProps}=this.props.button;
 
-      let childEl=child?child:null;//something inside button
+      let childEl=child?child:<ContentAdd />;//something inside button
+
+      style={...style};
+      style.verticalAlign="top";
 
       button=(
-        <IconButton {...otherButtonProps} onClick={this.buttonClickHandler.bind(this)}   >
+        <FloatingActionButton mini={true} style={style} {...otherButtonProps} onClick={this.buttonClickHandler.bind(this)}   >
         {childEl}
-        </IconButton>
+        </FloatingActionButton>
       );
 
     }
-
-    //textField props
-    const {...otherTF} = this.props.textField;
 
 
     return (
 
       <div>
         <div>
-          <AutoComplete {...otherTF}
+          <AutoComplete {...this.props.textField}
           ref="textField"
           disableFocusRipple={false}
           searchText={this.state.value}
@@ -246,6 +284,8 @@ class Tags extends Component{
 Tags.propTypes = {
   defTags: React.PropTypes.array, //start tags
   sourceTags:React.PropTypes.array, //tags created before and used in autocomplete
+  onlyFromSource:React.PropTypes.bool, //if true it will not allow to add tag which not exists in tag list
+  onlyFromSourceErrorText:React.PropTypes.string, //error info when onlyFromSource is on true and user wants add other tag
   textField:React.PropTypes.object, //textField props
   chip:React.PropTypes.object, //chip props
   containerClassName:   React.PropTypes.string, //class for container
@@ -261,6 +301,8 @@ Tags.propTypes = {
 Tags.defaultProps = {
   defTags: [],
   sourceTags:[],
+  onlyFromSource:false,
+  onlyFromSourceErrorText:"This tag is not allowed",
   containerClassName:"tags-container",
   containerStyle:{
     display:"flex",
@@ -271,7 +313,7 @@ Tags.defaultProps = {
   chip:null,
   onRemove:null,
   onAdd:null,
-  button:null
+  button:{child:<ContentAdd />} //default + icon
 };
 
 export default Tags;
