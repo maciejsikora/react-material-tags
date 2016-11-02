@@ -19,30 +19,25 @@
     </section>
 
     <section class="main-content">
-      <h3>
-<a class="anchor" id="example1" href="#example1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Tags with continents autocomplete</h3>
+    <h3>Tags with continents autocomplete</h3>
 
 <div id="example1"></div>
-<h3>
-<a class="anchor" id="example2" href="#example2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Tags with Europe countries autocomplete</h3>
+<h3>Tags with Europe countries autocomplete</h3>
 
 <div id="example2"></div>
 
-<h3>
-<a class="anchor" id="example3" href="#example3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Default set + icon change</h3>
+<h3>Default set + icon change</h3>
 
 <div id="example3"></div>
 
-<h3>
-<a class="anchor" id="example4" href="#example4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Tags only from source list ( Blocks adding other tags )</h3>
+<h3>Tags only from source list ( Blocks adding other tags )</h3>
 
 <div id="example4"></div>
 
 <h3>
 
 
-<h3>
-<a id="module-info" id="properties" class="anchor" href="#properties" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Component features</h3>
+<h3>Component features</h3>
 
 <p>Some <b>react-material-tags</b> features:
 <ul>
@@ -58,33 +53,59 @@
 </p>
 
 
-<h3><a class="anchor" id="props" href="#props" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Components properties</h3>
+<h3>Components properties</h3>
 
 <table>
   <thead>
     <tr><th>Property</th><th>Type</th><th>Description</th></tr>
   </thead>
   <tbody>
-    <tr><td>defTags</td><td>array of objects with label property - <b>[
-      {label:"Great Britain"},
-      {label:"Poland"}]</b> </td><td>Description</td></tr>
-    <tr><td>Property</td><td>Type</td><td>Description</td></tr>
-    <tr><td>Property</td><td>Type</td><td>Description</td></tr>
-    <tr><td>Property</td><td>Type</td><td>Description</td></tr>
-    <tr><td>Property</td><td>Type</td><td>Description</td></tr>
-    <tr><td>Property</td><td>Type</td><td>Description</td></tr>
-    <tr><td>Property</td><td>Type</td><td>Description</td></tr>
-    <tr><td>Property</td><td>Type</td><td>Description</td></tr>
-    <tr><td>Property</td><td>Type</td><td>Description</td></tr>
-    <tr><td>Property</td><td>Type</td><td>Description</td></tr>
+    <tr><td>defTags</td><td>array</td><td>It is list of tags which was chosen before, tipical usage is in edition when using this property We can set saved before tags. Example: <code>[{label:&quot;Poland&quot;},{label:&quot;USA&quot;}]</code></td></tr>
+    <tr><td>sourceTags</td><td>array</td><td>List of tags which will be available in autocomplete. If <b>onlyFromSource</b> property is on true then user can only choose tags from this list. Example: <code>[{label:&quot;Poland&quot;},{label:&quot;USA&quot;}]</code></td></tr>
+    <tr><td>onlyFromSource</td><td>bool</td><td>Default: false. If true then user can only add tag from <b>sourceTags</b>.</td></tr>
+    <tr><td>onlyFromSourceErrorText</td><td>string</td><td>Is used when <b>onlyFromSource</b> is on true and user wants to add other tag.</td></tr>
+    <tr><td>textField</td><td>object</td><td>Properties of material TextField ( <a target="_blank" href="http://www.material-ui.com/#/components/text-field">TextField</a>)</td></tr>
+    <tr><td>chip</td><td>object</td><td>Properties of chip component used to present single tag ( <a target="_blank" href="http://www.material-ui.com/#/components/chip">Chip</a>)</td></tr>
+    <tr><td>containerClassName</td><td>string</td><td>Container div class, default is <b>tags-container</b></td></tr>
+    <tr><td>containerStyle</td><td>object</td><td>Container div style prop.</td></tr>
+    <tr><td>onRemove</td><td>function</td><td>Is called on every remove tag. <code>function(removedTag,allTags)</code></td></tr>
+    <tr><td>onAdd</td><td>function</td><td>Is called after tag is added to list. <code>function(addedTag,allTags)</code></td></tr>
+    <tr><td>button</td><td>object</td><td><a target="_blank" href="http://www.material-ui.com/#/components/floating-action-button">FloatingActionButton</a> component props. Most important is <b>child</b> prop, default is <b>ContentAdd</b> which shows add icon. Default object looks like: <code>{child:&lt;ContentAdd /&gt;}</code> </td></tr>
   </tbody>
 </table>
 
-<h3>
-<a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+<h3>Usage</h3>
+<p>Add to your code (ES6):<code>import Tags from 'react-material-tags';</code></p>
+<p>Add to your code (ES5):<code>var Tags = require('react-material-tags');</code></p>
+<p><code>render(){
 
-<p>You can @mention a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor’s GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+    const sourceTags=[
+      {label:&quot;America&quot;},
+      {label:&quot;Europe&quot;},
+      {label:&quot;Africa&quot;},
+      {label:&quot;Asia&quot;},
+      {label:&quot;Australia&quot;}
+    ];
 
+    const defTags=[
+      {label:&quot;America&quot;}
+    ];
+
+    return (
+
+        &lt;Tags defTags={defTags} sourceTags={sourceTags} /&gt;
+    )
+
+  }</code></p>
+
+<h3>Dependencies</h3>
+
+<p>Component requires to work Metarial-Ui library - <a traget="_blank" href="http://www.material-ui.com/">Metrial UI</a>
+
+
+<h3>Authors and Contributors</h3>
+
+<p>Author of component is Maciej Sikora - <a href="https://github.com/maciejsikora">@maciejsikora</a>. Script is on MIT licence.</p>
 <h3>
 <a id="support-or-contact" class="anchor" href="#support-or-contact" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Support or Contact</h3>
 

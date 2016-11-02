@@ -1,6 +1,11 @@
 * {
   box-sizing: border-box; }
 
+code {
+  display: block;
+  white-space: pre-wrap;
+}
+
 .red-button{
 
   background:red!important;
@@ -126,7 +131,7 @@ a {
   font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
   font-size: 0.9rem;
   color: #383e41;
-  background-color: #f3f6fa;
+  background-color: #e8e8e8;
   border-radius: 0.3rem; }
 .main-content pre {
   padding: 0.8rem;
