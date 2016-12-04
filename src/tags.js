@@ -47,6 +47,7 @@ class Tags extends Component{
       const sourceTags=this.state.sourceTags.slice(); //new arr
       sourceTags.push(tagData);
       //update state
+      if (this.props.onRemove !== null) this.props.onRemove(tagData, tags);
       this.setState({sourceTags:sourceTags});
 
 
