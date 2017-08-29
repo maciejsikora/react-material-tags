@@ -48,9 +48,8 @@ class Tags extends Component{
       sourceTags.push(tagData);
       //update state
       this.setState({sourceTags:sourceTags});
-
-
     }
+    if (this.props.onRemove !== null) this.props.onRemove(tagData, tags);
 
     this.setState({tags:tags});
 
@@ -105,6 +104,8 @@ class Tags extends Component{
 
     if (this.state.errorText!==null && value.trim().length>0)
     this.hideInputError();
+
+    if (this.props.handleInputChange) this.props.handleInputChange(value);
 
   }
 
@@ -293,6 +294,7 @@ Tags.propTypes = {
   onRemove: React.PropTypes.func, //remove, delete tag callback function(removedTag,allTags)
   onAdd: React.PropTypes.func, //add callback  function(addedTag,allTags)
   button: React.PropTypes.object //button props - it has child prop inside
+  handleInputChange: React.PropTypes.func
 
 };
 
